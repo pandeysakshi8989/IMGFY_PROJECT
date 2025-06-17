@@ -1,0 +1,97 @@
+{% block title %}Image Processing{% endblock %}
+
+{% block content %}
+{% include 'dashboard.html' %}
+
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for msg in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{ msg }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- Main Container -->
+<div class="container my-5">
+  <h2 class="text-center mb-4">Upload & Process Image</h2>
+
+  <!-- Image Processing Card -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white fw-semibold">
+      Image Processing Panel
+    </div>
+    <div class="card-body">
+      <form action="{{ url_for('image_processing') }}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="task" value="processing">
+
+        <!-- User ID -->
+        <div class="mb-3">
+          <label for="user_id" class="form-label">User ID</label>
+          <input type="text" id="user_id" name="user_id" class="form-control" value="{{ current_user.id }}" readonly>
+        </div>
+
+        <!-- Upload Image -->
+        <div class="mb-3">
+          <label for="uploaded_image" class="form-label">Select Image</label>
+          <input type="file" class="form-control" id="uploaded_image" name="uploaded_image" accept="image/*" required>
+          <div class="form-text">Accepted formats: JPG, PNG, BMP</div>
+        </div>
+
+        <!-- Select Processing Operation -->
+        <div class="mb-4">
+          <label for="processing_operation" class="form-label">Choose Processing Operation</label>
+          <select id="processing_operation" name="processing_operation" class="form-select" required>
+            <option value="" disabled selected>-- Select an Operation --</option>
+            <optgroup label="Basic Operations">
+              <option value="grayscale">Grayscale</option>
+              <option value="red_channel">Red Channel</option>
+              <option value="green_channel">Green Channel</option>
+              <option value="blue_channel">Blue Channel</option>
+              <option value="contrast">Contrast Adjustment</option>
+              <option value="histogram_equalization">Histogram Equalization</option>
+              <option value="smooth_filter">Smoothening Filter</option>
+              <option value="edge_detection">Edge Detection</option>
+              <option value="noise_removal">Noise Removal</option>
+              <option value="image_restoration">Image Restoration</option>
+              <option value="segmentation">Segmentation</option>
+            </optgroup>
+            <optgroup label="Feature Extraction">
+              <option value="color_features">Color Features</option>
+              <option value="texture_features">Texture Features</option>
+              <option value="shape_features">Shape Features</option>
+              <option value="noise_features">Noise Features</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success w-100 fw-bold">Process Image</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Display Images -->
+  {% if original_image and processed_image %}
+  <div class="row text-center mb-5">
+    <div class="col-md-6 mb-3">
+      <h5>Original Image</h5>
+      <img src="{{ url_for('static', filename='uploads/' + original_image) }}" class="img-fluid border rounded shadow-sm" alt="Original Image">
+    </div>
+    <div class="col-md-6 mb-3">
+      <h5>Processed Image</h5>
+      <img src="{{ url_for('static', filename='processed/' + processed_image) }}" class="img-fluid border rounded shadow-sm" alt="Processed Image">
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="text-center">
+    <a href="{{ url_for('processing_records') }}" class="btn btn-outline-primary">View All Processing Records</a>
+  </div>
+</div>
+{% endblock %}

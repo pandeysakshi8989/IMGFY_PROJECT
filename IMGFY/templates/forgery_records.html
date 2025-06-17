@@ -1,0 +1,46 @@
+{% block title %}Forgery Detection Records{% endblock %}
+
+{% block content %}
+{% include 'dashboard.html' %}
+<div class="container py-5">
+  <h2 class="text-center mb-4">Forgery Detection Records </h2>
+
+  {% if records %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle text-center shadow-sm">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Record ID</th>
+            <th scope="col">Original Image</th>
+            <th scope="col">Processed Image</th>
+            <th scope="col">Algorithm</th>
+          </tr>
+        </thead>
+        <tbody>
+  {% for r in records %}
+  <tr>
+    <td>{{ r[0] }}</td>
+    <td>
+      <img src="{{ url_for('static', filename='uploads/' + r[1]) }}" alt="Uploaded Image" class="img-thumbnail" style="max-width: 200px;">
+    </td>
+    <td>
+      <img src="{{ url_for('static', filename='processed/' + r[2]) }}" alt="Processed Image" class="img-thumbnail" style="max-width: 200px;">
+    </td>
+    <td>{{ r[3] }}</td>
+  </tr>
+  {% endfor %}
+</tbody>
+
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-info text-center">
+      No forgery detection records found.
+    </div>
+  {% endif %}
+
+  <div class="text-center mt-4">
+    <a href="{{ url_for('image_forgery') }}" class="btn btn-warning">Upload New Image</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f7f7f7;
+}
+
+h1.display-4 {
+  color: #343a40;
+}
+
+.carousel-caption h5 {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#home-header {
+  padding: 40px 0;
+  background: linear-gradient(to right, #1d2b64, #f8cdda);
+  color: white;
+}
+
+.main-title {
+  font-size: 60px;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sub-title {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.logo-img {
+  width: 500px;
+  height: 500px;
+  object-fit: contain;
+}
+
+.navbar-logo {
+  height: 60px;
+  width: 60px;
+  object-fit: contain;
+}
+
+.navbar-nav .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  padding: 10px 20px;
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: #17a2b8;
+  color: #fff !important;
+}
+
+/* Double the height of the navbar */
+.navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Enlarge brand text and links */
+.navbar-brand span {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Enlarge nav links */
+.navbar-nav .nav-link {
+  font-size: 1.2rem;
+  padding: 0.8rem 1rem;
+}
+
+/* Increase logo size */
+.navbar-logo {
+  height: 60px;
+  width: 60px;
+  object-fit: contain;
+}

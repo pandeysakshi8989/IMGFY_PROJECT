@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block title %}Contact{% endblock %} {% block
+content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Contact Us</h2>
+  <p>
+    If you have any questions, issues, or feedback, feel free to contact us
+    using the form below or reach out directly through email.
+  </p>
+
+  <form action="{{ url_for('contact') }}" method="POST">
+    <div class="mb-3">
+      <label for="name" class="form-label">Your Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        placeholder="Enter your name"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Your Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="Enter your email"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="message" class="form-label">Your Message</label>
+      <textarea
+        class="form-control"
+        id="message"
+        name="message"
+        rows="5"
+        required
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Send Message</button>
+  </form>
+
+  <div class="mt-5">
+    <h5>Contact Details:</h5>
+    <p>Developer: Sakshi Pandey</p>
+    <p>Email: imgfy@imageforgery2025.com</p>
+    <p>Phone: +91-000000000000</p>
+    <p>Address: DSGHSGU, Sagar, India</p>
+  </div>
+</div>
+{% endblock %}

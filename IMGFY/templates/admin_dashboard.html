@@ -1,0 +1,89 @@
+<!-- admin_dashboard.html -->
+{% extends "base.html" %} {% block content %}
+
+<h2>Admin Dashboard</h2>
+<p>
+  <a
+    href="{{ url_for('admin_logout') }}"
+    class="btn btn-warning float-right"
+    >Logout</a
+  >
+</p>
+
+<h3>Users</h3>
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Action</th>
+  </tr>
+  {% for user in users %}
+  <tr>
+    <td>{{ user.id }}</td>
+    <td>{{ user.username }}</td>
+    <td>{{ user.email }}</td>
+    <td>
+      <a
+        href="{{ url_for('delete_user', id=user.id) }}"
+        class="btn btn-danger btn-sm"
+        >Delete</a
+      >
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h3>Contacts</h3>
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Message</th>
+    <th>Action</th>
+  </tr>
+  {% for c in contacts %}
+  <tr>
+    <td>{{ c.id }}</td>
+    <td>{{ c.name }}</td>
+    <td>{{ c.email }}</td>
+    <td>{{ c.message }}</td>
+    <td>
+      <a
+        href="{{ url_for('delete_contact', id=c.id) }}"
+        class="btn btn-danger btn-sm"
+        >Delete</a
+      >
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h3>Feedback</h3>
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Feedback</th>
+    <th>Action</th>
+  </tr>
+  {% for f in feedbacks %}
+  <tr>
+    <td>{{ f.id }}</td>
+    <td>{{ f.name }}</td>
+    <td>{{ f.email }}</td>
+    <td>{{ f.comments}}</td>
+    <td>
+      <a
+        href="{{ url_for('delete_feedback', id=f.id) }}"
+        class="btn btn-danger btn-sm"
+        >Delete</a
+      >
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

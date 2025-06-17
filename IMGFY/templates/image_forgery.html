@@ -1,0 +1,91 @@
+{% block title %}Forgery Detection{% endblock %}
+
+{% block content %}
+{% include 'dashboard.html' %}
+
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for msg in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{ msg }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- Main Container -->
+<div class="container my-5">
+  <h2 class="text-center mb-4">Copy-Move Forgery Detection Portal</h2>
+
+  <!-- Forgery Detection Card -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-warning text-dark fw-semibold">
+      Image Forgery Detection Panel
+    </div>
+    <div class="card-body">
+      <form action="{{ url_for('image_forgery') }}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="task" value="forgery">
+
+        <!-- User ID -->
+        <div class="mb-3">
+          <label for="user_id" class="form-label">User ID</label>
+          <input type="text" id="user_id" name="user_id" class="form-control bg-light" value="{{ current_user.id }}" readonly>
+        </div>
+
+        <!-- Upload Image -->
+        <div class="mb-3">
+          <label for="uploaded_image" class="form-label">Select Image for Forgery Detection</label>
+          <input type="file" class="form-control" id="uploaded_image" name="uploaded_image" accept="image/*" required>
+          <div class="form-text">Accepted formats: JPG, PNG, BMP</div>
+        </div>
+
+        <!-- Select Forgery Detection Algorithm -->
+        <div class="mb-4">
+          <label for="forgery_detection" class="form-label">Choose Detection Algorithm</label>
+          <select id="forgery_detection" name="forgery_detection" class="form-select" required>
+            <option value="" disabled selected>-- Select an Algorithm --</option>
+            <option value="dct">DCT</option>
+            <option value="lbp">LBP</option>
+            <option value="pca">PCA</option>
+            <option value="orb">ORB</option>
+            <option value="sift">SIFT</option>
+            <option value="brisk">BRISK</option>
+            <option value="surf">SURF</option>
+            <option value="kaze">KAZE</option>
+            <option value="svm">SVM</option>
+            <option value="decision_tree">Decision Tree</option>
+            <option value="random_forest">Random Forest</option>
+            <option value="cnn">CNN</option>
+            <option value="autoencoders">Autoencoders</option>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-warning w-100 fw-bold">Start Forgery Detection</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Display Images -->
+  {% if original_image and forged_result_image %}
+  <div class="row text-center mb-5">
+    <div class="col-md-6 mb-3">
+      <h5>Original Image</h5>
+      <img src="{{ url_for('static', filename='uploads/' + uploaded_image) }}" class="img-fluid border rounded shadow-sm" alt="Uploaded Image">
+    </div>
+    <div class="col-md-6 mb-3">
+      <h5>Forgery Detected Image</h5>
+      <img src="{{ url_for('static', filename='processed/' + processed_image) }}" class="img-fluid border rounded shadow-sm" alt="Forgery Detection Result">
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="text-center">
+    <a href="{{ url_for('forgery_records') }}" class="btn btn-outline-secondary">View All Forgery Detection Records</a>
+  </div>
+</div>
+{% endblock %}

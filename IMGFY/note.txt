@@ -1,0 +1,29 @@
+imgfy_project/
+│
+├── app.py
+├── create_db.py
+├── models.py
+├── processing_images.py
+├── forgery_images.py
+├── run.py
+├── requirements.txt
+│
+├── static/
+│   ├── uploads/
+│   └── processed/
+│
+└── templates/
+    ├── index.html
+    ├── about.html
+    ├── how_to_use.html
+    ├── contact.html
+    ├── login.html
+    ├── register.html
+    ├── dashboard.html
+    ├── feedback.html
+    ├── processing_results.html
+    ├── forgery_results.html
+    ├── processing_records.html
+    ├── forgery_records.html
+    ├── admin_login.html
+    └── admin_dashboard.html
